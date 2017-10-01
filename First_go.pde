@@ -46,8 +46,6 @@ void draw() {
   //  line(x1, y1, x2, y2); // draw a line
   //} 
   
-  // test func
-  doThing();
 }
 
 class VirtLine {
@@ -74,16 +72,4 @@ void keyPressed() {
     y2 = 360;
     
     line(x1, y1, x2, y2); // draw a line
-}
-
-void doThing() {
-  int thing = 8;
-
-  angle1 = (mouseX/float(thing) - 0.5) * -PI;
-}
-
-void segment(float x, float y, float a) {
-  translate(x, y);
-  rotate(a);
-  line(0, 0, segLength, 0);
 }
