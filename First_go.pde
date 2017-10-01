@@ -2,6 +2,8 @@
 VirtLine firstLine;
 VirtLine secondLine;
 
+boolean isMoving = false;
+
 void setup() {
   size(640, 360);
   strokeWeight(10);
@@ -20,6 +22,11 @@ void draw() {
 
   background(0);
   
+  if (isMoving) {
+     firstLine.move();
+     secondLine.move();
+  }
+  
   firstLine.display();
   secondLine.display();
 }
@@ -30,6 +37,7 @@ void keyPressed() {
     secondLine.update();
   } else if (key == 'm') {
      firstLine.move(); 
+     isMoving = !isMoving;
   }
 }
 
