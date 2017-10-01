@@ -35,16 +35,8 @@ void draw() {
   //line(660, 0, 300, 360);
 
   background(204);
-    
-  // sloppy way to do random interactivity
-  //if (keyPressed == true && key == 'r') { // If the key is pressed,
-  //  x1 = random(540);
-  //  y1 = 0;
-  //  x2 = random(640);
-  //  y2 = 360;
-    
-  //  line(x1, y1, x2, y2); // draw a line
-  //} 
+  
+  line(x1, y1, x2, y2); // draw a line
   
 }
 
@@ -66,10 +58,8 @@ class VirtLine {
 }
 
 void keyPressed() {
-      x1 = random(540);
+    x1 = random(540);
     y1 = 0;
     x2 = random(640);
     y2 = 360;
-    
-    line(x1, y1, x2, y2); // draw a line
 }
