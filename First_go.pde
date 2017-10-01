@@ -7,8 +7,8 @@ void setup() {
   strokeWeight(10);
   stroke(255, 255);
 
-  firstLine = new VirtLine(0,0,0,0);
-  secondLine = new VirtLine(0,0,0,0);
+  firstLine = new VirtLine(300, 0, 160, 360);
+  secondLine = new VirtLine(660, 0, 300, 360);
 }
 
 void draw() {
