@@ -58,6 +58,13 @@ class VirtLine {
    void display() {
     line(x1, y1, x2, y2); // draw a line   
    }
+   
+   void update() {
+     x1 = random(540);
+     y1 = 0;
+     x2 = random(640);
+     y2 = 360;
+   }
 }
 
 void keyPressed() {
@@ -65,4 +72,6 @@ void keyPressed() {
     y1 = 0;
     x2 = random(640);
     y2 = 360;
+    
+    firstLine.update();
 }
