@@ -29,6 +29,15 @@ void draw() {
   
 }
 
+void keyPressed() {
+    x1 = random(540);
+    y1 = 0;
+    x2 = random(640);
+    y2 = 360;
+    
+    firstLine.update();
+}
+
 class VirtLine {
   float x1;
   float y1;
@@ -51,13 +60,4 @@ class VirtLine {
      x2 = random(640);
      y2 = 360;
    }
-}
-
-void keyPressed() {
-    x1 = random(540);
-    y1 = 0;
-    x2 = random(640);
-    y2 = 360;
-    
-    firstLine.update();
 }
