@@ -37,7 +37,8 @@ void keyPressed() {
     secondLine.update();
   } else if (key == 'm') {
      firstLine.move(); 
-     isMoving = !isMoving;
+  } else if (key == 'M') {
+    isMoving = !isMoving;
   }
 }
 
