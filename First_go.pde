@@ -1,16 +1,4 @@
-/**
- * Arm. 
- * 
- * The angle of each segment is controlled with the mouseX and
- * mouseY position. The transformations applied to the first segment
- * are also applied to the second segment because they are inside
- * the same pushMatrix() and popMatrix() group.
- */
 
-float x, y;
-float angle1 = 0.0;
-float angle2 = 0.0;
-float segLength = 100;
 
 float x1 = 0;
     int y1 = 0;
@@ -24,8 +12,6 @@ void setup() {
   strokeWeight(10);
   stroke(255, 255);
 
-  x = width * 0.3;
-  y = height * 0.5;
   firstLine = new VirtLine(x1,y1,x2,y2);
 }
 
