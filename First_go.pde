@@ -18,14 +18,19 @@ void draw() {
   //line(0, 100, 640, 300);
   //line(660, 0, 300, 360);
 
-  background(204);
+  background(0);
+  
   firstLine.display();
   secondLine.display();
 }
 
-void keyPressed() {   
+void keyPressed() {
+  if (key == 'r') {
     firstLine.update();
     secondLine.update();
+  } else if (key == 'm') {
+     firstLine.move(); 
+  }
 }
 
 class VirtLine {
@@ -49,5 +54,10 @@ class VirtLine {
      y1 = 0;
      x2 = random(640);
      y2 = 360;
+   }
+   
+   void move() {
+      x1++;
+      x2++;
    }
 }
