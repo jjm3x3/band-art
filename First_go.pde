@@ -16,6 +16,8 @@ float x1 = 0;
     int y1 = 0;
 float x2 = 0;
     int y2 = 0;
+    
+VirtLine firstLine;
 
 void setup() {
   size(640, 360);
@@ -24,10 +26,10 @@ void setup() {
 
   x = width * 0.3;
   y = height * 0.5;
+  firstLine = new VirtLine(x1,y1,x2,y2);
 }
 
 void draw() {
-  background(0);
   
   // first frame of story bord
   //line(300, 0, 160, 360);
@@ -35,6 +37,7 @@ void draw() {
   //line(660, 0, 300, 360);
 
   background(204);
+  firstLine.display();
   
   line(x1, y1, x2, y2); // draw a line
   
