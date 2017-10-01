@@ -28,25 +28,15 @@ void setup() {
 
 void draw() {
   background(0);
-
-  // arm example
-  //angle1 = (mouseX/float(width) - 0.5) * -PI;
-  //angle2 = (mouseY/float(height) - 0.5) * PI;
-  //pushMatrix();
-  //segment(x, y, angle1); 
-  //segment(segLength, 0, angle2);
-  //popMatrix();
   
-  // first frae of story bord
+  // first frame of story bord
   //line(300, 0, 160, 360);
   //line(0, 100, 640, 300);
   //line(660, 0, 300, 360);
-  
-  // Moving/scaling a line with moseX
-  //line(2*mouseX, 0, mouseX, 360);
 
-    background(204);
+  background(204);
     
+  // sloppy way to do random interactivity
   //if (keyPressed == true && key == 'r') { // If the key is pressed,
   //  x1 = random(540);
   //  y1 = 0;
@@ -55,10 +45,6 @@ void draw() {
     
   //  line(x1, y1, x2, y2); // draw a line
   //} 
-    line(x1, y1, x2, y2); // draw a line
-  //else { // Otherwise,
-  //  rect(40, 40, 20, 20); // draw a rectangle
-  //}
   
   // test func
   doThing();
@@ -70,7 +56,14 @@ class VirtLine {
   float x2;
   float y2;
    VirtLine(float tempx1, float tempy1, float tempx2, float tempy2) {
-     
+     x1 = tempx1;
+     y1 = tempy1;
+     x2 = tempx2;
+     y2 = tempy2;
+   }
+   
+   void display() {
+    line(x1, y1, x2, y2); // draw a line   
    }
 }
 
