@@ -83,24 +83,19 @@ class VirtLine {
    void moveOrth() {
      float v1 = x2 - x1;
      float v2 = y2 - y1;
-     //float vLen = sqrt(pow(v1, 2) + pow(v2, 2)); 
-     //float u1 = v1 / vLen;
-     //float u2 = v2 / vLen;
+     // solve for an orthoganal vector (a,b)
      float b = -v1 / v2;  //asumes "a" is 1
      
-     //float zero = v1 * 1 + v2 * b;
-     println("What are these vectors: (" +  v1 + ", " + v2 + "), (" + 1 + ", " + b + ")");
-     //println("This should be 0: " + zero);
+     // unitize the orthoganal vector
      float orthLen = sqrt(pow(1,2) + pow(b,2));
      float orthU1 = 1/ orthLen;
      float orthU2 = b/ orthLen;
      
-     println("Here is an orth unit: (" + orthU1 + ", " + orthU2 + ")");
+     // Move by the orthoganal
      x1 = x1 + orthU1;
      x2 = x2 + orthU1;
      y1 = y1 + orthU2;
      y2 = y2 + orthU2;
-     // just calling normalizeVector to try it out
    }
    
    void move() {
