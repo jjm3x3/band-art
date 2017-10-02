@@ -23,15 +23,17 @@ void draw() {
   background(0);
   
   if (isMoving) {
-     firstLine.move();
-     secondLine.move();
+     
+    //firstLine.move();
+    //secondLine.move();
+     
+     firstLine.moveOrth();
+     secondLine.moveOrth();
   }
   
   firstLine.display();
   secondLine.display();
   
-  //firstLine.normalizeVector();
-  firstLine.pointDebug();
 }
 
 void keyPressed() {
@@ -80,6 +82,7 @@ class VirtLine {
      // could/ should return a normalized vector
    }
    
+   // will move only orthogonaly to itself
    void moveOrth() {
      float v1 = x2 - x1;
      float v2 = y2 - y1;
@@ -98,6 +101,7 @@ class VirtLine {
      y2 = y2 + orthU2;
    }
    
+   // Will move in a standard unifom direction
    void move() {
      // asume every line is going down and to the right at 45 degress
      x1 += 0.85;
