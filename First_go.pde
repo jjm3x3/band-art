@@ -77,6 +77,10 @@ class VirtLine {
    }
    
    void normalizeVector() {
+     // could/ should return a normalized vector
+   }
+   
+   void moveOrth() {
      float v1 = x2 - x1;
      float v2 = y2 - y1;
      //float vLen = sqrt(pow(v1, 2) + pow(v2, 2)); 
@@ -96,9 +100,6 @@ class VirtLine {
      x2 = x2 + orthU1;
      y1 = y1 + orthU2;
      y2 = y2 + orthU2;
-   }
-   
-   void moveOrth() {
      // just calling normalizeVector to try it out
    }
    
