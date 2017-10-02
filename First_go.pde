@@ -29,6 +29,8 @@ void draw() {
   
   firstLine.display();
   secondLine.display();
+  
+  firstLine.pointDebug();
 }
 
 void keyPressed() {
@@ -65,8 +67,23 @@ class VirtLine {
      y2 = 360;
    }
    
+   void debug() {
+     println("x1: " + x1 + ", y1: " + y1 + ", x2: ", + x2 + ", y2: " + y2);
+   }
+   
+   void pointDebug() {
+      println("p1: (" + x1 + ", " + y1 + ") p2: (", + x2 + ", " + y2 +")");
+   }
+   
    void move() {
-      x1++;
-      x2++;
+     // asume every line is going down and to the right at 45 degress
+     x1 += 0.85;
+     y1 += 0.85;
+     x2 += 0.85;
+     y2 += 0.85;
+   
+     // move right along the x
+     //x1++;
+     //x2++;
    }
 }
