@@ -18,7 +18,7 @@ public class Main extends PApplet {
 
     public void setup() {
         strokeWeight(10);
-        stroke(255, 255);
+        stroke(0, 0);
 
         firstLine = new VirtLine(this,300, 0, 160, 360);
         firstLine.setShade(true);
@@ -33,7 +33,7 @@ public class Main extends PApplet {
         //line(0, 100, 640, 300);
         //line(660, 0, 300, 360);
 
-        background(0);
+        background(150);
 
         if (isMoving) {
 
