@@ -1,4 +1,6 @@
 import processing.core.PApplet;
+import processing.core.PConstants;
+import processing.core.PShape;
 
 class VirtLine {
 
@@ -8,15 +10,41 @@ class VirtLine {
     float x2;
     float y2;
 
+    boolean isShading;
+    boolean left;
+    int color;
+
     VirtLine(PApplet theParent, float tempx1, float tempy1, float tempx2, float tempy2) {
         parent = theParent;
         x1 = tempx1;
         y1 = tempy1;
         x2 = tempx2;
         y2 = tempy2;
+
+        isShading = false;
+        color = parent.color(0, 0, 255, 220);
     }
 
     void display() {
+        if (isShading) {
+            PShape shade = parent.createShape();
+            shade.beginShape();
+            shade.fill(color);
+            shade.noStroke();
+            if (left) {
+                shade.vertex(0, y1);
+                shade.vertex(x1, y1);
+                shade.vertex(x2, y2);
+                shade.vertex(0, y2);
+            } else {
+                shade.vertex(x1, y1);
+                shade.vertex(640, y1);
+                shade.vertex(640, y2);
+                shade.vertex(x2, y2);
+            }
+            shade.endShape(PConstants.CLOSE);
+            parent.shape(shade);
+        }
         parent.line(x1, y1, x2, y2); // draw a line
     }
 
@@ -25,6 +53,13 @@ class VirtLine {
         y1 = 0;
         x2 = parent.random(640);
         y2 = 360;
+
+        color = parent.color(parent.random(255),parent.random(255),parent.random(255), 200);
+    }
+
+    void setShade(boolean left) {
+        isShading = !isShading;
+        this.left = left;
     }
 
     // debug will print the four float values which

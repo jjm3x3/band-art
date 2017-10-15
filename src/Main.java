@@ -21,7 +21,9 @@ public class Main extends PApplet {
         stroke(255, 255);
 
         firstLine = new VirtLine(this,300, 0, 160, 360);
+        firstLine.setShade(true);
         secondLine = new VirtLine(this,660, 0, 300, 360);
+        secondLine.setShade(false);
     }
 
     public void draw() {
