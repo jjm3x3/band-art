@@ -80,7 +80,7 @@ class VirtLine {
 
     // will move only orthogonally to itself
     // if left is true it will move leftward
-    void moveOrth() {
+    void moveOrth(boolean left) {
         float v1 = x2 - x1;
         float v2 = y2 - y1;
         // solve for an orthogonal vector (a,b)
@@ -91,11 +91,18 @@ class VirtLine {
         float orthU1 = 1/ orthLen;
         float orthU2 = b/ orthLen;
 
-        // Move by the orthoganal
-        x1 = x1 + orthU1;
-        x2 = x2 + orthU1;
-        y1 = y1 + orthU2;
-        y2 = y2 + orthU2;
+        // Move by the orthogonal
+        if (left) {
+            x1 = x1 - orthU1;
+            x2 = x2 - orthU1;
+            y1 = y1 - orthU2;
+            y2 = y2 - orthU2;
+        } else {
+            x1 = x1 + orthU1;
+            x2 = x2 + orthU1;
+            y1 = y1 + orthU2;
+            y2 = y2 + orthU2;
+        }
     }
 
     // Will move in a standard uniform direction

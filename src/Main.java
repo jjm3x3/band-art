@@ -40,8 +40,8 @@ public class Main extends PApplet {
             //firstLine.move();
             //secondLine.move();
 
-            firstLine.moveOrth();
-            secondLine.moveOrth();
+            firstLine.moveOrth(false);
+            secondLine.moveOrth(true);
         }
 
         firstLine.display();
