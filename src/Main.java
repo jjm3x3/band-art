@@ -15,8 +15,6 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        strokeWeight(10);
-        stroke(0, 255);
 
         scene1 = new VirtLineScene(this);
 
@@ -39,6 +37,7 @@ public class Main extends PApplet {
     void dotScene() {
         background(0);
 
+        strokeWeight(10);
         stroke(255);
         for (int i = 0; i < 20; ++i) {
             stroke(255, 0 + i * 12);

@@ -25,6 +25,7 @@ public class VirtLineScene {
         //line(0, 100, 640, 300);
         //line(660, 0, 300, 360);
 
+        parent.strokeWeight(10);
         parent.background(150);
 
         if (isMoving) {
