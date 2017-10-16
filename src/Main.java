@@ -28,12 +28,25 @@ public class Main extends PApplet {
 
     float movingX = 15;
 
+    int curScene = 0;
     public void draw() {
+        switch(curScene) {
+            case 1:
+                firstScene();
+                return;
+            default:
+                dotScene();
+        }
+
+
+    }
+
+    void dotScene() {
         background(0);
 
         stroke(255);
         for (int i = 0; i < 20; ++i) {
-            stroke(255,0 + i * 12);
+            stroke(255, 0 + i * 12);
             point(movingX + i * 10, 25);
             point(movingX + 5 + i * 10, 35);
         }
@@ -50,10 +63,17 @@ public class Main extends PApplet {
             e.printStackTrace();
         }
 
-
     }
 
     public void keyPressed() {
+        switch(key) {
+            case '1':
+                curScene = 1;
+                return;
+            case '0':
+                curScene = 0;
+                return;
+        }
         if (key == 'r') {
             firstLine.update();
             secondLine.update();
