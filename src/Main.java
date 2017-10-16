@@ -15,12 +15,9 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-
         scene1 = new VirtLineScene(this);
 
     }
-
-    float movingX = 15;
 
     public void draw() {
         switch(curScene) {
@@ -34,6 +31,7 @@ public class Main extends PApplet {
 
     }
 
+    float movingX = 15;
     void dotScene() {
         background(0);
 
