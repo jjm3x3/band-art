@@ -17,6 +17,7 @@ public class Main extends PApplet {
     public void setup() {
         scene1 = new VirtLineScene(this);
 
+        seq1 = new DotSequence(this, 20, 15);
     }
 
     public void draw() {
@@ -32,6 +33,7 @@ public class Main extends PApplet {
     }
 
     float movingX = 15;
+    DotSequence seq1;
     void dotScene() {
         background(0);
 
@@ -49,6 +51,7 @@ public class Main extends PApplet {
             movingX = 0;
         }
 
+        seq1.draw();
         try {
             Thread.sleep(50);
         } catch (InterruptedException e) {
