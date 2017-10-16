@@ -6,11 +6,9 @@ public class Main extends PApplet {
         PApplet.main("Main");
     }
 
+    int curScene = 0;
 
-    VirtLine firstLine;
-    VirtLine secondLine;
-
-    boolean isMoving = false;
+    VirtLineScene scene1;
 
     public void settings() {
         size(640, 360);
@@ -20,19 +18,16 @@ public class Main extends PApplet {
         strokeWeight(10);
         stroke(0, 255);
 
-        firstLine = new VirtLine(this, 300, 0, 160, 360);
-        firstLine.setShade(true);
-        secondLine = new VirtLine(this, 660, 0, 300, 360);
-        secondLine.setShade(false);
+        scene1 = new VirtLineScene(this);
+
     }
 
     float movingX = 15;
 
-    int curScene = 0;
     public void draw() {
         switch(curScene) {
             case 1:
-                firstScene();
+                scene1.draw();
                 return;
             default:
                 dotScene();
@@ -74,37 +69,9 @@ public class Main extends PApplet {
                 curScene = 0;
                 return;
         }
-        if (key == 'r') {
-            firstLine.update();
-            secondLine.update();
-        } else if (key == 'm') {
-            firstLine.move();
-        } else if (key == 'M') {
-            isMoving = !isMoving;
-        }
+        scene1.keyPressed(key);
     }
 
-    void firstScene(){
-
-        // first frame of story bord
-        //line(300, 0, 160, 360);
-        //line(0, 100, 640, 300);
-        //line(660, 0, 300, 360);
-
-        background(150);
-
-        if (isMoving) {
-
-            //firstLine.move();
-            //secondLine.move();
-
-            firstLine.moveOrth(false);
-            secondLine.moveOrth(true);
-        }
-
-        firstLine.display();
-        secondLine.display();
-    }
 }
 
 
