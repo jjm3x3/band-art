@@ -42,22 +42,7 @@ public class Main extends PApplet {
         background(0);
 
         strokeWeight(10);
-//        stroke(255);
-//        for (int i = 0; i < 20; ++i) {
-//            stroke(255, 0 + i * 12);
-//            point(movingX + i * 10, 25);
-//            point(movingX + 5 + i * 10, 35);
-//        }
-//
-//        movingX += 5;
-//
-//        if (movingX >= 640) {
-//            movingX = 0;
-//        }
 
-        seq1.draw();
-        seq2.draw();
-        seq3.draw();
         try {
             Thread.sleep(50);
         } catch (InterruptedException e) {
