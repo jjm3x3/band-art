@@ -25,7 +25,7 @@ public class DotSequence {
             parent.point(movingX + i * 10, y);
         }
 
-        movingX += 5;
+        movingX += 10;
 
         if (movingX >= 640) {
             movingX = 0;
