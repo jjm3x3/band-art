@@ -27,12 +27,43 @@ public class Main extends PApplet {
             case 1:
                 scene1.draw();
                 return;
-            default:
+            case 2:
                 dotScene();
+                return;
+            default:
+                circles();
         }
 
 
     }
+
+
+    int[] states = new int[6];
+    void circles() {
+        if (states[0] == 0) {
+            for(int i = 0; i < states.length; ++i) {
+                states[i] = 50;
+            }
+        } else {
+            for(int i = 0; i < states.length; ++i) {
+                states[i]++;
+            }
+        }
+        int circleSize = 50;
+        fill(200,10,200);
+        for (int i = 0; i < states.length; ++i) {
+            ellipse(states[i],50, circleSize, circleSize);
+        }
+//        ellipse(50,50, circleSize, circleSize);
+//        ellipse(50,50, circleSize, circleSize);
+//        ellipse(50,50, circleSize, circleSize);
+//        ellipse(50,50, circleSize, circleSize);
+//        ellipse(50,50, circleSize, circleSize);
+//        ellipse(50,50, circleSize, circleSize);
+    }
+
+
+
 
     float movingX = 15;
     DotSequence seq1;
