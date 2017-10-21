@@ -9,14 +9,14 @@ public class Main extends PApplet {
     int curScene = 0;
 
     VirtLineScene scene1;
-
+    CircleScene scene2;
     public void settings() {
         size(640, 360);
     }
 
     public void setup() {
         scene1 = new VirtLineScene(this);
-
+        scene2 = new CircleScene(this);
         seq1 = new DotSequence(this, 20, 15);
         seq2 = new DotSequence(this, 15, 25);
         seq3 = new DotSequence(this, 20, 35);
@@ -31,7 +31,8 @@ public class Main extends PApplet {
                 dotScene();
                 return;
             default:
-                circles();
+                scene2.draw();
+                //circles();
         }
 
 
@@ -39,30 +40,6 @@ public class Main extends PApplet {
 
 
     int[] states = new int[6];
-    void circles() {
-        if (states[0] == 0) {
-            for(int i = 0; i < states.length; ++i) {
-                states[i] = 50;
-            }
-        } else {
-            for(int i = 0; i < states.length; ++i) {
-                states[i]++;
-            }
-        }
-        int circleSize = 50;
-        fill(200,10,200);
-        for (int i = 0; i < states.length; ++i) {
-            ellipse(states[i],50, circleSize, circleSize);
-        }
-//        ellipse(50,50, circleSize, circleSize);
-//        ellipse(50,50, circleSize, circleSize);
-//        ellipse(50,50, circleSize, circleSize);
-//        ellipse(50,50, circleSize, circleSize);
-//        ellipse(50,50, circleSize, circleSize);
-//        ellipse(50,50, circleSize, circleSize);
-    }
-
-
 
 
     float movingX = 15;
