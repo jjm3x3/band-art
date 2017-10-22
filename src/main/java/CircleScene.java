@@ -52,6 +52,7 @@ public class CircleScene {
         for(Circle c: shapes) {
             double x = parent.width/2 + (radialOffset+100*radialOscilator.value()) * Math.sin(i * theta  + angularOffset + angularOscilator.value());
             double y = parent.height/2 + (radialOffset+100*radialOscilator.value())* Math.cos(i * theta  + angularOffset + angularOscilator.value());
+            System.out.println("What are our x: " + x + ", y: " + y);
 //            double x = parent.width/2 + (radialOffset * radialOscilator.value()) * Math.sin(i * theta  + angularOffset * angularOscilator.value());
 //            double y = parent.height/2 + (radialOffset * radialOscilator.value())* Math.cos(i * theta  + angularOffset * angularOscilator.value());
             i++;

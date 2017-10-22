@@ -83,6 +83,7 @@ public class Main extends PApplet {
             case '0':
                 curScene = 0;
                 return;
+                
         }
         scene1.keyPressed(key);
     }
