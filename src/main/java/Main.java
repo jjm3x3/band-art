@@ -18,6 +18,19 @@ public class Main extends PApplet {
     public void setup() {
         scene1 = new VirtLineScene(this);
         scene2 = new CircleScene(this);
+
+        for (int i = 0; i < sequences.length; ++i) {
+            int horizontalOffset = 0;
+            int partitionOffset = 0;
+            if(i > 100) {
+                horizontalOffset = 400;
+                partitionOffset = 100;
+            } else if(i > 50) {
+                horizontalOffset = 200;
+                partitionOffset = 50;
+            }
+            sequences[i] = new DotSequence(this, 5 * (i % 21) + horizontalOffset, 10 * (i - partitionOffset));
+        }
         seq1 = new DotSequence(this, 20, 15);
         seq2 = new DotSequence(this, 15, 25);
         seq3 = new DotSequence(this, 20, 35);
@@ -39,11 +52,11 @@ public class Main extends PApplet {
 
     }
 
-
     int[] states = new int[6];
 
 
     float movingX = 15;
+    DotSequence[] sequences = new DotSequence[200];
     DotSequence seq1;
     DotSequence seq2;
     DotSequence seq3;
@@ -51,22 +64,13 @@ public class Main extends PApplet {
         background(0);
 
         strokeWeight(10);
-//        stroke(255);
-//        for (int i = 0; i < 20; ++i) {
-//            stroke(255, 0 + i * 12);
-//            point(movingX + i * 10, 25);
-//            point(movingX + 5 + i * 10, 35);
-//        }
-//
-//        movingX += 5;
-//
-//        if (movingX >= 640) {
-//            movingX = 0;
-//        }
 
-        seq1.draw();
-        seq2.draw();
-        seq3.draw();
+        for(int i = 0; i < sequences.length; ++i)  {
+            sequences[i].draw();
+        }
+//        seq1.draw();
+//        seq2.draw();
+//        seq3.draw();
         try {
             Thread.sleep(50);
         } catch (InterruptedException e) {
@@ -83,9 +87,17 @@ public class Main extends PApplet {
             case '0':
                 curScene = 0;
                 return;
+            case '2':
+                curScene = 2;
+                return;
                 
         }
         scene1.keyPressed(key);
+        if(key == 'r') {
+            for(int i = 0; i < sequences.length; ++i) {
+                sequences[i].addRandomColor();
+            }
+        }
     }
 
 }
