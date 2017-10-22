@@ -47,6 +47,7 @@ public class CircleScene {
     }
 
     void draw() {
+        parent.background(0);
         update();
         for(Circle c: shapes) {
             c.display();
