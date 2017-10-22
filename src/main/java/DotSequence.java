@@ -35,5 +35,4 @@ public class DotSequence {
     void addRandomColor() {
         color = parent.color(parent.random(255),parent.random(255),parent.random(255), 200);
     }
-
 }

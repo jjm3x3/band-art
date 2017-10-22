@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/band-art.iml" filepath="$PROJECT_DIR$/band-art.iml" />
+      <module fileurl="file://$PROJECT_DIR$/band-art-maven.iml" filepath="$PROJECT_DIR$/band-art-maven.iml" />
     </modules>
   </component>
 </project>
