@@ -9,6 +9,7 @@ public class Circle {
     PApplet parent;
     Point center;
     PShape shape;
+
     public Circle(PApplet parent, Point point) {
         this.parent = parent;
         this.center = point;
@@ -20,7 +21,20 @@ public class Circle {
         //this.shape.endShape();
     }
 
+    void move(Point p) {
+        Point thiscenter = center;
+        center = p;
+        float movex = (float) (p.x - thiscenter.x);
+        float movey = (float) (p.y - thiscenter.y);
+        this.shape.translate(movex, movey);
+    }
+
     void display() {
         parent.shape(shape,0,0);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Circle(%s,%s)",this.center.x,this.center.y);
     }
 }
