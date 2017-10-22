@@ -22,6 +22,7 @@ public class TriangularLayout {
         // just use the width to set the scale at the moment:
         float scale = parent.height/2;///(2*numRadialPoints);
         spacing = scale/numRadialPoints;
+
         points = new ArrayList<>();
         int numrows = 2*numRadialPoints+1;
         for(int i = 1; i<= numrows; ++i) {
