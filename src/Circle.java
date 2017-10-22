@@ -16,7 +16,7 @@ public class Circle {
         this.shape = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, 50, 50);
 
 
-        this.shape.setFill(parent.color(132,234,10));
+        this.shape.setFill(parent.color(125,0,0));
         //this.shape.setFill(false);
         //this.shape.endShape();
     }
