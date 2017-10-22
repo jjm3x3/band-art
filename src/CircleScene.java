@@ -13,6 +13,10 @@ public class CircleScene {
     Oscilator radialOscilator;
     Oscilator angularOscilator;
 
+    int numCircles = 6;
+
+
+
     CircleScene(PApplet parent) {
         this.parent = parent;
         setup();
@@ -20,50 +24,43 @@ public class CircleScene {
 
     void setup() {
         parent.background(0);
-        int n = 6;
-        double theta = 2*Math.PI/n;
-        this.radialOffset = (float)0;//Math.max(parent.pmouseX,0);
-        this.angularOffset = (float)0;//parent.pmouseY/2;
+        double theta = 2*Math.PI/numCircles;
+        radialOffset = (float) 0;
+        angularOffset = (float) 0;
         oscP5.OscP5 controler = new OscP5(this,12348);
-        this.radialOscilator = new Oscilator(parent);//, controler);
-        this.angularOscilator = new Oscilator(parent);//, controler);
+        radialOscilator = new Oscilator(parent);
+        angularOscilator = new Oscilator(parent);
         controler.status(0);
         System.out.println(controler.properties());
         shapes = new ArrayList<>();
-        for(int i = 0; i < n; ++i) {
+        for(int i = 0; i < numCircles; ++i) {
             double x = parent.width/2 + (radialOffset) * Math.sin(i * theta + angularOffset);
             double y = parent.height/2 + (radialOffset) * Math.cos(i * theta + angularOffset);
-            Point pos = new Point(x,y);
+            Point pos = new Point(x, y);
             Circle c = new Circle(parent, pos);
             shapes.add(c);
         }
     }
 
     void update() {
-        int n = 6;
-        double theta = 2*Math.PI/n;
+        double theta = 2*Math.PI/numCircles;
         int i = 0;
 //        oscP5.OscEventListener listener;
 //        controler.addListener(listener);
         //System.out.print("radialOffset:"+this.radialOffset+" - ");
         //System.out.println("angularOffset:"+this.angularOffset);
         for(Circle c: shapes) {
-
-            //String str = String.format("%d, %s",i,c.toString());
-            //System.out.println(str);
-
             double x = parent.width/2 + (radialOffset+100*radialOscilator.value()) * Math.sin(i * theta  + angularOffset + angularOscilator.value());
             double y = parent.height/2 + (radialOffset+100*radialOscilator.value())* Math.cos(i * theta  + angularOffset + angularOscilator.value());
+//            double x = parent.width/2 + (radialOffset * radialOscilator.value()) * Math.sin(i * theta  + angularOffset * angularOscilator.value());
+//            double y = parent.height/2 + (radialOffset * radialOscilator.value())* Math.cos(i * theta  + angularOffset * angularOscilator.value());
             i++;
-
             c.move(new Point(x,y));
         }
     }
 
     void draw() {
-
         update();
-
         for(Circle c: shapes) {
             c.display();
         }
@@ -73,12 +70,11 @@ public class CircleScene {
     // NB: the switching below appears to require if-thens.
     void oscEvent(OscMessage oscmsg) {
         String addr = oscmsg.addrPattern();
-//        System.out.println(addr);
+        //        System.out.println(addr);
         // Uses the Automat5 controller of touchOsc
-        //switch (addr) {
-            // This is the left hand xy slider
-          if(addr.equals("/3/xyM_l")) {
-              float  lxval  = 300 * oscmsg.get(1).floatValue();
+        // This is the left hand xy slider
+        if(addr.equals("/3/xyM_l")) {
+              float  lxval  = parent.width * oscmsg.get(1).floatValue();
               float  lyval  = 25 * oscmsg.get(0).floatValue();
               this.radialOffset = Math.max(lxval,0);
               this.angularOffset = lyval/2;

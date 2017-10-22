@@ -18,7 +18,7 @@ public class Oscilator {
     }
 
     public float value() {
-        double now = ((double)(parent.millis()-time0)%20000)/1000;
-        return (float)Math.sin(frequency * 2 * Math.PI * now);
+        double now = ((double)(parent.millis()-time0))/1000;
+        return (float) (.5*(1 - Math.cos(frequency * 2 * Math.PI * now)));
     }
 }
