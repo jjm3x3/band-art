@@ -11,7 +11,8 @@ public class Main extends PApplet {
     VirtLineScene scene1;
     CircleScene scene2;
     public void settings() {
-        size(640, 360);
+        fullScreen();
+        //size(640, 360);
     }
 
     public void setup() {

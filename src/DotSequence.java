@@ -25,5 +25,4 @@ public class DotSequence {
             movingX = 0;
         }
     }
-
 }
