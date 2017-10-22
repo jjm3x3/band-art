@@ -8,9 +8,9 @@ public class Main extends PApplet {
 
     int curScene = 0;
 
-    VirtLineScene scene1;
-    CircleScene scene2;
-    DotSequenceScene scene3;
+    VirtLineScene virtLineScene;
+    CircleScene circleScene;
+    DotSequenceScene dotSequenceScene;
 
     public void settings() {
         fullScreen();
@@ -18,22 +18,22 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        scene1 = new VirtLineScene(this);
-        scene2 = new CircleScene(this);
-        scene3 = new DotSequenceScene(this);
+        virtLineScene = new VirtLineScene(this);
+        circleScene = new CircleScene(this);
+        dotSequenceScene = new DotSequenceScene(this);
 
     }
 
     public void draw() {
         switch(curScene) {
             case 1:
-                scene1.draw();
+                virtLineScene.draw();
                 return;
             case 2:
-                scene2.draw();
+                dotSequenceScene.draw();
                 return;
             default:
-                scene3.draw();
+                circleScene.draw();
                 //circles();
         }
 
@@ -42,19 +42,19 @@ public class Main extends PApplet {
 
     public void keyPressed() {
         switch(key) {
-            case '1':
-                curScene = 1;
-                return;
             case '0':
                 curScene = 0;
+                return;
+            case '1':
+                curScene = 1;
                 return;
             case '2':
                 curScene = 2;
                 return;
                 
         }
-        scene1.keyPressed(key);
-        scene3.keyPressed(key);
+        virtLineScene.keyPressed(key);
+        dotSequenceScene.keyPressed(key);
     }
 
 }
