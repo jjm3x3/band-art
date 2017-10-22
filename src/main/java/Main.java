@@ -1,3 +1,4 @@
+import oscP5.OscP5;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
@@ -6,6 +7,7 @@ public class Main extends PApplet {
         PApplet.main("Main");
     }
 
+    oscP5.OscP5 controler;
     int curScene = 0;
 
     VirtLineScene virtLineScene;
@@ -18,8 +20,13 @@ public class Main extends PApplet {
     }
 
     public void setup() {
+        controler = new OscP5(this,12348);
+        controler.status(0);
+        System.out.println(controler.properties());
+
         virtLineScene = new VirtLineScene(this);
         circleScene = new CircleScene(this);
+        controler.addListener(circleScene);
         dotSequenceScene = new DotSequenceScene(this);
 
     }
@@ -30,11 +37,10 @@ public class Main extends PApplet {
                 virtLineScene.draw();
                 return;
             case 2:
-                dotSequenceScene.draw();
+                circleScene.draw();
                 return;
             default:
-                circleScene.draw();
-                //circles();
+                dotSequenceScene.draw();
         }
 
 

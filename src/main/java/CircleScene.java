@@ -2,11 +2,10 @@ import processing.core.PApplet;
 import oscP5.*;
 import java.util.ArrayList;
 import java.util.List;
-public class CircleScene {
+public class CircleScene  implements oscP5.OscEventListener {
 
     PApplet parent;
     List<Circle> shapes;
-    oscP5.OscP5 controler;
     Float radialOffset;
     Float angularOffset;
 
@@ -27,11 +26,8 @@ public class CircleScene {
         double theta = 2*Math.PI/numCircles;
         radialOffset = (float) 0;
         angularOffset = (float) 0;
-        oscP5.OscP5 controler = new OscP5(this,12348);
         radialOscilator = new Oscilator(parent);
         angularOscilator = new Oscilator(parent);
-        controler.status(0);
-        System.out.println(controler.properties());
         shapes = new ArrayList<>();
         for(int i = 0; i < numCircles; ++i) {
             double x = parent.width/2 + (radialOffset) * Math.sin(i * theta + angularOffset);
@@ -52,7 +48,7 @@ public class CircleScene {
         for(Circle c: shapes) {
             double x = parent.width/2 + (radialOffset+100*radialOscilator.value()) * Math.sin(i * theta  + angularOffset + angularOscilator.value());
             double y = parent.height/2 + (radialOffset+100*radialOscilator.value())* Math.cos(i * theta  + angularOffset + angularOscilator.value());
-            System.out.println("What are our x: " + x + ", y: " + y);
+//            System.out.println("What are our x: " + x + ", y: " + y);
 //            double x = parent.width/2 + (radialOffset * radialOscilator.value()) * Math.sin(i * theta  + angularOffset * angularOscilator.value());
 //            double y = parent.height/2 + (radialOffset * radialOscilator.value())* Math.cos(i * theta  + angularOffset * angularOscilator.value());
             i++;
@@ -69,7 +65,7 @@ public class CircleScene {
 
     /* incoming osc message are forwarded to the oscEvent method. */
     // NB: the switching below appears to require if-thens.
-    void oscEvent(OscMessage oscmsg) {
+    public void oscEvent(OscMessage oscmsg) {
         String addr = oscmsg.addrPattern();
         //        System.out.println(addr);
         // Uses the Automat5 controller of touchOsc
@@ -86,5 +82,10 @@ public class CircleScene {
               radialOscilator.frequency = (double)rxval;
               angularOscilator.frequency = (double)ryval;
           } else {}
+    }
+
+    @Override
+    public void oscStatus(OscStatus oscStatus) {
+
     }
 }
