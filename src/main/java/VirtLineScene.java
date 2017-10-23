@@ -12,9 +12,9 @@ public class VirtLineScene implements Scene {
     VirtLineScene(PApplet parent) {
         this.parent = parent;
 
-        firstLine = new VirtLine(parent, 300, 0, 160, 360);
+        firstLine = new VirtLine(parent, (float)(parent.width * (4.0/7)), 0, (float)(parent.width * (1.0/4)), parent.height);
         firstLine.setShade(true);
-        secondLine = new VirtLine(parent, 660, 0, 300, 360);
+        secondLine = new VirtLine(parent, parent.width + (float)(parent.width * (1.0/30)), 0, (float)(parent.width * (2.0/5)), parent.height);
         secondLine.setShade(false);
     }
 
