@@ -3,26 +3,36 @@ import javafx.scene.shape.Shape;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PShape;
+import processing.core.PVector;
 
 public class Circle {
 
     PApplet parent;
-    Point center;
+    PVector center;
     PShape shape;
 
-    public Circle(PApplet parent, Point point) {
+    public Circle(PApplet parent, PVector point, float radius) {
         this.parent = parent;
         this.center = point;
-        this.shape = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, 50, 50);
+
+        this.shape = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, radius, radius);
+        this.shape.setFill(false);
+        this.shape.setStroke(parent.color(125,0,0));
+        this.shape.strokeWeight(10);
 
 
-        this.shape.setFill(parent.color(125,0,0));
-        //this.shape.setFill(false);
-        //this.shape.endShape();
+
+
+
+
+        //this.shape.setFill(parent.color(125,0,0));
+
+
+        this.shape.endShape();
     }
 
-    void move(Point p) {
-        Point thiscenter = center;
+    void move(PVector p) {
+        PVector thiscenter = center;
         center = p;
         float movex = (float) (p.x - thiscenter.x);
         float movey = (float) (p.y - thiscenter.y);

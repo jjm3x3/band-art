@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PVector;
 
 
 public class MousyProtoCircleScene {
@@ -17,8 +18,8 @@ public class MousyProtoCircleScene {
         for(int i = 0; i < n; ++i) {
             double x = parent.width/2 + radialOffset * Math.sin(i * theta+angularOffset);
             double y = parent.height/2 + radialOffset* Math.cos(i*theta+angularOffset);
-            Point pos = new Point(x,y);
-            Circle c = new Circle(parent, pos);
+            PVector pos = new PVector((float)x,(float)y);
+            Circle c = new Circle(parent, pos,(float)50);
             c.display();
         }
     }
