@@ -64,6 +64,9 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
         }
     }
 
+    @Override
+    public void keyPressed(char key) { }
+
     /* incoming osc message are forwarded to the oscEvent method. */
     // NB: the switching below appears to require if-thens.
     public void oscEvent(OscMessage oscmsg) {

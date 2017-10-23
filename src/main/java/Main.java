@@ -17,9 +17,6 @@ public class Main extends PApplet {
 
     Map<Integer, Scene> sceneMap = new HashMap<>();
 
-    VirtLineScene virtLineScene;
-    CircleScene circleScene;
-    DotSequenceScene dotSequenceScene;
 
     public void settings() {
         fullScreen();
@@ -31,28 +28,20 @@ public class Main extends PApplet {
         controler.status(0);
         System.out.println(controler.properties());
 
-        virtLineScene = new VirtLineScene(this);
+
+        Scene virtLineScene = new VirtLineScene(this);
         sceneMap.put(1, virtLineScene);
-        circleScene = new CircleScene(this);
+        Scene circleScene = new CircleScene(this);
         sceneMap.put(2,circleScene);
-        dotSequenceScene = new DotSequenceScene(this);
+        Scene dotSequenceScene = new DotSequenceScene(this);
         sceneMap.put(0, dotSequenceScene);
 
     }
 
     public void draw() {
-        switch(curScene) {
-            case 1:
-                virtLineScene.draw();
-                return;
-            case 2:
-                circleScene.draw();
-                return;
-            default:
-                dotSequenceScene.draw();
+        if (sceneMap.containsKey(curScene)) {
+            sceneMap.get(curScene).draw();
         }
-
-
     }
 
     public void keyPressed() {
@@ -76,8 +65,6 @@ public class Main extends PApplet {
         if (nextScene instanceof OscEventListener) {
             controler.addListener((OscEventListener) nextScene);
         }
-        virtLineScene.keyPressed(key);
-        dotSequenceScene.keyPressed(key);
     }
 
 }

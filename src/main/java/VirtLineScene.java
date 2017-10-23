@@ -44,7 +44,7 @@ public class VirtLineScene implements Scene {
         secondLine.display();
     }
 
-    void keyPressed(char key) {
+    public void keyPressed(char key) {
          if (key == 'r') {
             firstLine.update();
             secondLine.update();
