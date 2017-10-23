@@ -13,8 +13,6 @@ public class Main extends PApplet {
 
     oscP5.OscP5 controler;
     int curScene = 0;
-
-
     Map<Integer, Scene> sceneMap = new HashMap<>();
 
 

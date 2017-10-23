@@ -38,8 +38,8 @@ class VirtLine {
                 shade.vertex(0, y2);
             } else {
                 shade.vertex(x1, y1);
-                shade.vertex(640, y1);
-                shade.vertex(640, y2);
+                shade.vertex(parent.width, y1);
+                shade.vertex(parent.width, y2);
                 shade.vertex(x2, y2);
             }
             shade.endShape(PConstants.CLOSE);
@@ -49,10 +49,10 @@ class VirtLine {
     }
 
     void update() {
-        x1 = parent.random(540);
+        x1 = parent.random(parent.width);
         y1 = 0;
-        x2 = parent.random(640);
-        y2 = 360;
+        x2 = parent.random(parent.width);
+        y2 = parent.height;
 
         color = parent.color(parent.random(255),parent.random(255),parent.random(255), 200);
     }
