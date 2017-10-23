@@ -1,5 +1,9 @@
+import oscP5.OscEventListener;
 import oscP5.OscP5;
 import processing.core.PApplet;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends PApplet {
 
@@ -9,6 +13,9 @@ public class Main extends PApplet {
 
     oscP5.OscP5 controler;
     int curScene = 0;
+
+
+    Map<Integer, Scene> sceneMap = new HashMap<>();
 
     VirtLineScene virtLineScene;
     CircleScene circleScene;
@@ -25,9 +32,11 @@ public class Main extends PApplet {
         System.out.println(controler.properties());
 
         virtLineScene = new VirtLineScene(this);
+        sceneMap.put(1, virtLineScene);
         circleScene = new CircleScene(this);
-        controler.addListener(circleScene);
+        sceneMap.put(2,circleScene);
         dotSequenceScene = new DotSequenceScene(this);
+        sceneMap.put(0, dotSequenceScene);
 
     }
 
@@ -47,17 +56,25 @@ public class Main extends PApplet {
     }
 
     public void keyPressed() {
+        Scene theCurScene = sceneMap.get(curScene);
+        if (theCurScene instanceof OscEventListener) {
+            controler.removeListener((OscEventListener) theCurScene);
+        }
         switch(key) {
             case '0':
                 curScene = 0;
-                return;
+                break;
             case '1':
                 curScene = 1;
-                return;
+                break;
             case '2':
                 curScene = 2;
-                return;
+                break;
                 
+        }
+        Scene nextScene = sceneMap.get(curScene);
+        if (nextScene instanceof OscEventListener) {
+            controler.addListener((OscEventListener) nextScene);
         }
         virtLineScene.keyPressed(key);
         dotSequenceScene.keyPressed(key);

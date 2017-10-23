@@ -1,6 +1,6 @@
 import processing.core.*;
 
-public class VirtLineScene {
+public class VirtLineScene implements Scene {
 
     PApplet parent;
 
@@ -18,7 +18,10 @@ public class VirtLineScene {
         secondLine.setShade(false);
     }
 
-    void draw(){
+    @Override
+    public void setup() { }
+
+    public void draw(){
 
         // first frame of story bord
         //line(300, 0, 160, 360);

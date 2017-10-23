@@ -2,7 +2,8 @@ import processing.core.PApplet;
 import oscP5.*;
 import java.util.ArrayList;
 import java.util.List;
-public class CircleScene  implements oscP5.OscEventListener {
+
+public class CircleScene  implements Scene, oscP5.OscEventListener {
 
     PApplet parent;
     List<Circle> shapes;
@@ -21,7 +22,7 @@ public class CircleScene  implements oscP5.OscEventListener {
         setup();
     }
 
-    void setup() {
+    public void setup() {
         parent.background(0);
         double theta = 2*Math.PI/numCircles;
         radialOffset = (float) 0;
@@ -48,7 +49,7 @@ public class CircleScene  implements oscP5.OscEventListener {
         for(Circle c: shapes) {
             double x = parent.width/2 + (radialOffset+100*radialOscilator.value()) * Math.sin(i * theta  + angularOffset + angularOscilator.value());
             double y = parent.height/2 + (radialOffset+100*radialOscilator.value())* Math.cos(i * theta  + angularOffset + angularOscilator.value());
-//            System.out.println("What are our x: " + x + ", y: " + y);
+            System.out.println("What are our x: " + x + ", y: " + y);
 //            double x = parent.width/2 + (radialOffset * radialOscilator.value()) * Math.sin(i * theta  + angularOffset * angularOscilator.value());
 //            double y = parent.height/2 + (radialOffset * radialOscilator.value())* Math.cos(i * theta  + angularOffset * angularOscilator.value());
             i++;
@@ -56,7 +57,7 @@ public class CircleScene  implements oscP5.OscEventListener {
         }
     }
 
-    void draw() {
+    public void draw() {
         update();
         for(Circle c: shapes) {
             c.display();

@@ -1,6 +1,9 @@
+import oscP5.OscMessage;
+import oscP5.OscP5;
+import oscP5.OscStatus;
 import processing.core.PApplet;
 
-public class DotSequenceScene {
+public class DotSequenceScene implements Scene, oscP5.OscEventListener {
 
     float movingX = 15;
     DotSequence[] sequences = new DotSequence[200];
@@ -9,9 +12,11 @@ public class DotSequenceScene {
     DotSequence seq3;
     PApplet parent;
 
+
+
     DotSequenceScene(PApplet parent) {
         this.parent = parent;
-        
+
         for (int i = 0; i < sequences.length; ++i) {
             int horizontalOffset = 0;
             int partitionOffset = 0;
@@ -28,6 +33,9 @@ public class DotSequenceScene {
         seq2 = new DotSequence(parent, 15, 25);
         seq3 = new DotSequence(parent, 20, 35);
     }
+
+    @Override
+    public void setup() { }
 
     public void draw() {
         parent.background(0);
@@ -53,5 +61,17 @@ public class DotSequenceScene {
                 sequences[i].addRandomColor();
             }
         }
+    }
+
+    public void oscEvent(OscMessage oscmsg) {
+        String addr = oscmsg.addrPattern();
+//        if(addr.equals("/3/xyM_l")) {
+            System.out.println("Here is where they over lap");
+//        }
+    }
+
+    @Override
+    public void oscStatus(OscStatus oscStatus) {
+
     }
 }
