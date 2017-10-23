@@ -46,24 +46,26 @@ public class Main extends PApplet {
 
     public void keyPressed() {
         Scene theCurScene = sceneMap.get(curScene);
-        if (theCurScene instanceof OscEventListener) {
+        if (theCurScene instanceof OscEventListener) { // if theCurScene == null it will never be an instance of OscEventListener
             controler.removeListener((OscEventListener) theCurScene);
         }
-        switch(key) {
-            case '0':
-                curScene = 0;
-                break;
-            case '1':
-                curScene = 1;
-                break;
-            case '2':
-                curScene = 2;
-                break;
-                
+
+        // switch the scene by the numbers on the keyboard
+        // implies that it is between 0 - 9
+        if( key > '/' && key < ':' ) {
+           try {
+               curScene = Integer.parseInt(key+ "");
+           } catch (NumberFormatException e) {
+                System.out.println("how is this not a number: " + key);
+           }
         }
-        Scene nextScene = sceneMap.get(curScene);
-        if (nextScene instanceof OscEventListener) {
-            controler.addListener((OscEventListener) nextScene);
+
+        if (sceneMap.containsKey(curScene)) {
+            Scene nextScene = sceneMap.get(curScene);
+            if (nextScene instanceof OscEventListener) {
+                controler.addListener((OscEventListener) nextScene);
+            }
+            nextScene.keyPressed(key);
         }
     }
 
