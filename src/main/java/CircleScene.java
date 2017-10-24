@@ -24,7 +24,8 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
     Oscilator radialOscilator;
     Oscilator angularOscilator;
     int backgroundColor = 0;
-    CircleScene(PApplet parent) {
+    CircleScene(PApplet parent, PointNetwork layout) {
+        pointNet = layout;
         this.parent = parent;
         radialOffset = (float) 0;
         angularOffset = (float) 0;
@@ -36,9 +37,6 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
     public void setup() {
         parent.background(backgroundColor);
 
-        int numRadialPoints = 6;
-        pointNet = TriangularLayout.makeTriangularNet(parent.width/2, numRadialPoints, new PVector(parent.width/2,parent.height/2));
-        //pointNet = CircularLayout.makeCircularNet(parent.width/4, 1*numRadialPoints, new PVector(parent.width/2,parent.height/2));
 
 
         shapes = new ArrayList<>();

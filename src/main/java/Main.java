@@ -1,6 +1,7 @@
 import oscP5.OscEventListener;
 import oscP5.OscP5;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +27,16 @@ public class Main extends PApplet {
         controler.status(0);
         System.out.println(controler.properties());
 
+        int numRadialPoints = 6;
+        PointNetwork triangularNet = TriangularLayout.makeTriangularNet(width/2, numRadialPoints, new PVector(width/2,height/2));
+        PointNetwork circularNet = CircularLayout.makeCircularNet(width/4, 1*numRadialPoints, new PVector(width/2,height/2));
 
         Scene virtLineScene = new VirtLineScene(this);
         sceneMap.put(1, virtLineScene);
-        Scene circleScene = new CircleScene(this);
+        Scene circleScene = new CircleScene(this, triangularNet);
         sceneMap.put(2,circleScene);
+        Scene circleScene2 = new CircleScene(this, circularNet);
+        sceneMap.put(3,circleScene2);
         Scene dotSequenceScene = new DotSequenceScene(this);
         sceneMap.put(0, dotSequenceScene);
 
