@@ -68,29 +68,15 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
     }
 
     void update() {
-//        double theta = 2*Math.PI/numCircles;
-//        int i = 0;
-////        oscP5.OscEventListener listener;
-////        controler.addListener(listener);
-//        //System.out.print("radialOffset:"+this.radialOffset+" - ");
-//        //System.out.println("angularOffset:"+this.angularOffset);
         PVector angularPurturbation = new PVector((float) Math.sin(angularOffset+angularOscilator.value()),(float) Math.cos(angularOffset+angularOscilator.value()));
 
         for(Tuple<Circle,Tuple<Integer,PVector>> shapeState: Tuple.zipLists(shapes,Tuple.zipLists(pointNetIndices,direction))) {
             Circle c = shapeState.x;
             int ind = shapeState.y.x;
             PVector dir = shapeState.y.y.copy();
-//            System.out.println("dir x:"+dir.x+" y:"+dir.y);
             PVector radialPurturbation = dir.mult(radialOffset+radialOscilator.value());
             PVector basepos = pointNet.net.get(ind).x.copy();
             PVector pos = basepos.add(radialPurturbation.add(angularPurturbation.mult(1)));
-//            double x = pointNet.pointnet.get(ind).x + (radialOffset+100*) *;
-//            double y = parent.height/2 + (radialOffset+100*radialOscilator.value())* Math.cos(i * theta  + angularOffset + angularOscilator.value());
-////            double x = parent.width/2 + (radialOffset * radialOscilator.value()) * Math.sin(i * theta  + angularOffset * angularOscilator.value());
-////            double y = parent.height/2 + (radialOffset * radialOscilator.value())* Math.cos(i * theta  + angularOffset * angularOscilator.value());
-//            i++;
-//            System.out.print("initialpos:x:"+c.center.x+" y:"+c.center.y);
-//            System.out.println(" goesto pos:x:"+pos.x+" y:"+pos.y);
            c.move(pos);
         }
     }
