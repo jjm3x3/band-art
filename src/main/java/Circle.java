@@ -17,13 +17,8 @@ public class Circle {
 
         this.shape = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, radius, radius);
         this.shape.setFill(false);
-        this.shape.setStroke(parent.color(125,0,0));
+        this.shape.setStroke(parent.color(255,0,0));
         this.shape.strokeWeight(10);
-
-
-
-
-
 
         //this.shape.setFill(parent.color(125,0,0));
 

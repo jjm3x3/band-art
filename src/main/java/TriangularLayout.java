@@ -3,30 +3,40 @@ import processing.core.PVector;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // TODO (fprac): What is this?
-public class TriangularLayout extends PointNetwork {
+public class TriangularLayout {
 
-    PApplet parent;
+
     float spacing;
-    int numRadialPoints = 4;
-    //List<Point> points;
+    int numRadialPoints;
+
 
 
     float alpha = (float)Math.sqrt(3)/2;
     float beta = (float)0.5;
     PVector center;
-    TriangularLayout(PApplet parent) {
-        this.parent = parent;
+
+    private TriangularLayout(float scale, int numRadialPoints, PVector center) {
+        spacing = scale/numRadialPoints;
+        this.center = center;
+        this.numRadialPoints = numRadialPoints;
         setup();
     }
 
-    void setup() {
+    static PointNetwork makeTriangularNet(float scale, int numRadialPoints, PVector center) {
+        TriangularLayout trilayout = new TriangularLayout(scale, numRadialPoints, center);
+        return trilayout.setup();
+    }
+
+    PointNetwork setup() {
         // just use the width to set the scale at the moment:
-        float scale = parent.height/(numRadialPoints/2);///(2*numRadialPoints);
-        spacing = scale/numRadialPoints;
+        //float scale = parent.height/(numRadialPoints/2);///(2*numRadialPoints);
+
         int numrows = 2*numRadialPoints+1;
-        net = new HashMap<>();
+
+        PointNetwork net = new PointNetwork();
 
         int pointInd = 0;
         for(int i = 1; i<= numrows; ++i) {
@@ -34,14 +44,15 @@ public class TriangularLayout extends PointNetwork {
                 PVector p = ind2coords(i,j);
                 List<PVector> nbrs = vertNeighbors(i,j);
                 Tuple<PVector,List<PVector>> vecNbrs = new Tuple<>(p,nbrs);
-                net.put(pointInd,vecNbrs);
+                net.net.put(pointInd,vecNbrs);
                 pointInd++;
             }
         }
+        return net;
     }
 
     PVector ind2coords(int i, int j) {
-        PVector  center = new PVector(parent.width/2,parent.height/2);
+//        PVector  center = new PVector(parent.width/2,parent.height/2);
         PVector initVector = new PVector(-1*alpha, beta).mult(spacing* numRadialPoints);
         PVector ur = new PVector(alpha, beta).mult(spacing);
         PVector d = new PVector((float)0,-2*beta).mult(spacing);

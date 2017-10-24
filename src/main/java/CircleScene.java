@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class CircleScene  implements Scene, oscP5.OscEventListener {
 
-
-
     PApplet parent;
+
     List<Circle> shapes;
-    List<PVector> direction;
+    List<PVector> direction; // orientation
     List<Integer> pointNetIndices;
     PointNetwork pointNet;
+
     oscP5.OscP5 controler;
     Float radialOffset;
     Float angularOffset;
@@ -25,32 +25,35 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
     int backgroundColor = 0;
     CircleScene(PApplet parent) {
         this.parent = parent;
+        radialOffset = (float) 0;
+        angularOffset = (float) 0;
+        radialOscilator = new Oscilator(parent);
+        angularOscilator = new Oscilator(parent);
         setup();
     }
 
     public void setup() {
         parent.background(backgroundColor);
-        TriangularLayout homeCenters = new TriangularLayout(parent);
-        pointNet = new PointNetwork();
-        pointNet.net = homeCenters.net;
+        int numRadialPoints = 6;
+        pointNet = TriangularLayout.makeTriangularNet(parent.width/2,numRadialPoints,new PVector(parent.width/2,parent.height/2));
 
         //double theta = 2*Math.PI/numCircles;
 
-        radialOffset = (float) 0;
-        angularOffset = (float) 0;
-        radialOscilator = new Oscilator(parent);
-        angularOscilator = new Oscilator(parent);
         shapes = new ArrayList<>();
         direction = new ArrayList<>();
         pointNetIndices = new ArrayList<>();
+
+        float spacing = pointNet.meanSpacing();
+
         for(Map.Entry<Integer, Tuple<PVector,List<PVector>>> pair: pointNet.net.entrySet()) {
             int ind = pair.getKey();
             List<PVector> nbrs = pair.getValue().y;
             PVector basePoint = pair.getValue().x.copy();
+
             for(PVector nbrPoint: nbrs) {
-                Circle c = new Circle(parent, basePoint, homeCenters.spacing);
+                Circle c = new Circle(parent, basePoint, spacing);
                 PVector dirbase = nbrPoint.copy();
-                PVector dir = (dirbase.sub(basePoint)).normalize().mult(homeCenters.spacing);
+                PVector dir = (dirbase.sub(basePoint)).normalize().mult(spacing);
                 shapes.add(c);
                 direction.add(dir);
                 pointNetIndices.add(ind);
@@ -99,6 +102,7 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
            c.move(pos);
         }
     }
+
 
     public void draw() {
         update();
