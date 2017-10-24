@@ -16,7 +16,7 @@ public class PointNetwork {
     }
     float meanSpacing() {
         float space = 0;
-        int count = 0;
+        float count = 0;
         for(Map.Entry<Integer, Tuple<PVector,List<PVector>>> pair: net.entrySet()) {
             List<PVector> nbrs = pair.getValue().y;
             PVector basePoint = pair.getValue().x.copy();

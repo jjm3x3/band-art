@@ -14,6 +14,7 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
     List<Circle> shapes;
     List<PVector> direction; // orientation
     List<Integer> pointNetIndices;
+
     PointNetwork pointNet;
 
     oscP5.OscP5 controler;
@@ -34,10 +35,11 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
 
     public void setup() {
         parent.background(backgroundColor);
-        int numRadialPoints = 6;
-        pointNet = TriangularLayout.makeTriangularNet(parent.width/2,numRadialPoints,new PVector(parent.width/2,parent.height/2));
 
-        //double theta = 2*Math.PI/numCircles;
+        int numRadialPoints = 6;
+        pointNet = TriangularLayout.makeTriangularNet(parent.width/2, numRadialPoints, new PVector(parent.width/2,parent.height/2));
+        //pointNet = CircularLayout.makeCircularNet(parent.width/4, 1*numRadialPoints, new PVector(parent.width/2,parent.height/2));
+
 
         shapes = new ArrayList<>();
         direction = new ArrayList<>();
@@ -57,19 +59,9 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
                 shapes.add(c);
                 direction.add(dir);
                 pointNetIndices.add(ind);
+                System.out.println("c: "+c+" dir:"+dir+" ind"+ind);
             }
         }
-
-
-//        for(Pair<PVector,List<PVector>> pntNbrs: PointNetwork.zipLists(homeCenters.points,homeCenters.neighbors)) {
-//            PVector p = pntNbrs.getKey();
-//            List<PVector> nbrs = pntNbrs.getValue();
-//            for(PVector np: nbrs) {
-             //   double x = parent.width/2 + (radialOffset) * Math.sin(i * theta + angularOffset);
-              //  double y = parent.height/2 + (radialOffset) * Math.cos(i * theta + angularOffset);
-
-
-//            }
 
 
 

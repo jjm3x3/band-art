@@ -44,7 +44,7 @@ public class TriangularLayout {
                 PVector p = ind2coords(i,j);
                 List<PVector> nbrs = vertNeighbors(i,j);
                 Tuple<PVector,List<PVector>> vecNbrs = new Tuple<>(p,nbrs);
-                net.net.put(pointInd,vecNbrs);
+                 net.net.put(pointInd,vecNbrs);
                 pointInd++;
             }
         }
