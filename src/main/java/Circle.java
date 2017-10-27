@@ -10,12 +10,12 @@ public class Circle {
     PApplet parent;
     PVector center;
     PShape shape;
-
-    public Circle(PApplet parent, PVector point, float radius) {
+    float scale;
+    public Circle(PApplet parent, PVector point, float scale) {
         this.parent = parent;
         this.center = point;
-
-        this.shape = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, radius, radius);
+        this.scale = scale;
+        this.shape = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, scale, scale);
         this.shape.setFill(false);
         this.shape.setStroke(parent.color(255,0,0));
         this.shape.strokeWeight(10);

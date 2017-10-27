@@ -1,6 +1,7 @@
 import javafx.util.Pair;
 import processing.core.PApplet;
 import oscP5.*;
+import processing.core.PShape;
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -17,15 +18,17 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
 
     PointNetwork pointNet;
 
-    oscP5.OscP5 controler;
     Float radialOffset;
     Float angularOffset;
-//    TriangularLayout homeCenters;
     Oscilator radialOscilator;
     Oscilator angularOscilator;
     int backgroundColor = 0;
+
+    PointNetwork purtPoints;
+
     CircleScene(PApplet parent, PointNetwork layout) {
         pointNet = layout;
+        purtPoints = pointNet.randomPurturbation();
         this.parent = parent;
         radialOffset = (float) 0;
         angularOffset = (float) 0;
@@ -36,20 +39,14 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
 
     public void setup() {
         parent.background(backgroundColor);
-
-
-
         shapes = new ArrayList<>();
         direction = new ArrayList<>();
         pointNetIndices = new ArrayList<>();
-
         float spacing = pointNet.meanSpacing();
-
         for(Map.Entry<Integer, Tuple<PVector,List<PVector>>> pair: pointNet.net.entrySet()) {
             int ind = pair.getKey();
             List<PVector> nbrs = pair.getValue().y;
             PVector basePoint = pair.getValue().x.copy();
-
             for(PVector nbrPoint: nbrs) {
                 Circle c = new Circle(parent, basePoint, spacing);
                 PVector dirbase = nbrPoint.copy();
@@ -57,37 +54,51 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
                 shapes.add(c);
                 direction.add(dir);
                 pointNetIndices.add(ind);
-                System.out.println("c: "+c+" dir:"+dir+" ind"+ind);
             }
         }
-
-
-
     }
 
-    void update() {
+    void shifter(Circle c, PVector dir, int ind) {
         PVector angularPurturbation = new PVector((float) Math.sin(angularOffset+angularOscilator.value()),(float) Math.cos(angularOffset+angularOscilator.value()));
+        PVector radialPurturbation = dir.mult(radialOffset+radialOscilator.value());
+        PVector basepos = pointNet.net.get(ind).x.copy();
+        PVector pos = basepos.add(radialPurturbation.add(angularPurturbation.mult(1)));
+        c.move(pos);
+    }
 
+//    void filler(Circle c, PVector dir, int ind) {
+//        c.shape.setFill(true);
+//        c.display();
+//        superrepeter(c,dir,ind);
+//    }
+
+    void update() {
+//        PVector angularPurturbation = new PVector((float) Math.sin(angularOffset+angularOscilator.value()),(float) Math.cos(angularOffset+angularOscilator.value()));
+        parent.background(backgroundColor);
         for(Tuple<Circle,Tuple<Integer,PVector>> shapeState: Tuple.zipLists(shapes,Tuple.zipLists(pointNetIndices,direction))) {
             Circle c = shapeState.x;
             int ind = shapeState.y.x;
             PVector dir = shapeState.y.y.copy();
-            PVector radialPurturbation = dir.mult(radialOffset+radialOscilator.value());
-            PVector basepos = pointNet.net.get(ind).x.copy();
-            PVector pos = basepos.add(radialPurturbation.add(angularPurturbation.mult(1)));
-           c.move(pos);
+            shifter(c,dir,ind);
+            //filler(c,dir,ind);
+            //            PVector radialPurturbation = dir.mult(radialOffset+radialOscilator.value());
+            //PVector basepos = pointNet.net.get(ind).x.copy();
+            //PVector pos = basepos.add(radialPurturbation.add(angularPurturbation.mult(1)));
+           //c.move(pos);
+
+            //c.display();
         }
     }
 
 
     public void draw() {
         update();
-        parent.background(backgroundColor);
-        for(Circle c: shapes) {
-            c.display();
-        }
+//
+//        for(Circle c: shapes) {
+//
+//        }
+//    }
     }
-
     @Override
     public void keyPressed(char key) { }
 
