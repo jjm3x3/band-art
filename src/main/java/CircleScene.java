@@ -1,8 +1,11 @@
 import javafx.util.Pair;
 import processing.core.PApplet;
 import oscP5.*;
+import processing.core.PConstants;
+import processing.core.PShape;
 import processing.core.PVector;
 
+import java.sql.PseudoColumnUsage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +60,6 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
                 shapes.add(c);
                 direction.add(dir);
                 pointNetIndices.add(ind);
-                System.out.println("c: "+c+" dir:"+dir+" ind"+ind);
             }
         }
 

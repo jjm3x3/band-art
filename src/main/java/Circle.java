@@ -5,6 +5,8 @@ import processing.core.PConstants;
 import processing.core.PShape;
 import processing.core.PVector;
 
+import java.util.function.Consumer;
+
 public class Circle {
 
     PApplet parent;
@@ -18,12 +20,11 @@ public class Circle {
         this.shape = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, radius, radius);
         this.shape.setFill(false);
         this.shape.setStroke(parent.color(255,0,0));
-        this.shape.strokeWeight(10);
 
         //this.shape.setFill(parent.color(125,0,0));
 
 
-        this.shape.endShape();
+//        this.shape.endShape();
     }
 
     void move(PVector p) {
@@ -31,7 +32,7 @@ public class Circle {
         center = p;
         float movex = (float) (p.x - thiscenter.x);
         float movey = (float) (p.y - thiscenter.y);
-        this.shape.translate(movex, movey);
+        shape.translate(movex, movey);
     }
 
     void display() {
@@ -41,5 +42,9 @@ public class Circle {
     @Override
     public String toString() {
         return String.format("Circle(%s,%s)",this.center.x,this.center.y);
+    }
+
+    public void apply(Consumer<PShape> f) {
+        f.accept(shape);
     }
 }
