@@ -20,6 +20,8 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
 
     PointNetwork pointNet;
 
+
+
     oscP5.OscP5 controler;
     Float radialOffset;
     Float angularOffset;
@@ -55,23 +57,38 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
 
             for(PVector nbrPoint: nbrs) {
                 Circle c = new Circle(parent, basePoint, spacing);
+                c.apply(x -> {
+                            PShape base = x.getChild(0);
+                            float rad = base.width;
+                            //parent.pushMatrix();
+                            //parent.translate(c.center.x,c.center.y);
+                            for(int i = 0; i < 8; i++) {
+                                float newrad = ((float)8-i)/((float)9)*spacing;
+                                PShape p = parent.createShape(PConstants.ELLIPSE,c.center.x,c.center.y,newrad,newrad);
+                                parent.fill(parent.color((int)parent.random(255),(int)parent.random(255),(int)parent.random(255)),parent.random(255));
+                                x.addChild(p);
+                            }
+                            //parent.popMatrix();
+                        }
+                );
                 PVector dirbase = nbrPoint.copy();
                 PVector dir = (dirbase.sub(basePoint)).normalize().mult(spacing);
                 shapes.add(c);
                 direction.add(dir);
                 pointNetIndices.add(ind);
+
             }
+
         }
-
-
 
     }
 
     void update() {
         PVector angularPurturbation = new PVector((float) Math.sin(angularOffset+angularOscilator.value()),(float) Math.cos(angularOffset+angularOscilator.value()));
-
         for(Tuple<Circle,Tuple<Integer,PVector>> shapeState: Tuple.zipLists(shapes,Tuple.zipLists(pointNetIndices,direction))) {
             Circle c = shapeState.x;
+
+
             int ind = shapeState.y.x;
             PVector dir = shapeState.y.y.copy();
             PVector radialPurturbation = dir.mult(radialOffset+radialOscilator.value());
@@ -89,6 +106,8 @@ public class CircleScene  implements Scene, oscP5.OscEventListener {
             c.display();
         }
     }
+
+
 
     @Override
     public void keyPressed(char key) { }
