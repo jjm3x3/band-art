@@ -17,10 +17,13 @@ public class Circle {
         this.parent = parent;
         this.center = point;
 
-        this.shape = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, radius, radius);
-        this.shape.setFill(false);
-        this.shape.setStroke(parent.color(255,0,0));
+        this.shape = parent.createShape(PConstants.GROUP);
 
+        PShape kidA = parent.createShape(PConstants.ELLIPSE, (float) center.x, (float) center.y, radius, radius);
+        kidA.setFill(false);
+        kidA.setStroke(parent.color(255,0,0));
+
+        shape.addChild(kidA);
         //this.shape.setFill(parent.color(125,0,0));
 
 
