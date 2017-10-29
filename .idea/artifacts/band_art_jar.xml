@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="band-art:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/band_art</output-path>
+    <root id="archive" name="band-art_jar.jar">
+      <element id="module-output" name="band-art-maven" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/oscp5-0.9.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/processing/core/3.3.5/core-3.3.5.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
